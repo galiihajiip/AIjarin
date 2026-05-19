@@ -12,6 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "db:migrate": "supabase db push",
+    "db:reset": "supabase db reset",
     "prepare": "husky"
   },
   "dependencies": {
@@ -58,6 +60,7 @@
     "lint-staged": "^17.0.5",
     "postcss": "^8.4.49",
     "prettier": "^3.8.3",
+    "supabase": "^2.100.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2",
     "vitest": "^4.1.6"
