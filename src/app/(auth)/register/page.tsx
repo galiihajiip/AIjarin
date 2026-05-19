@@ -1,28 +1,28 @@
 import Link from 'next/link';
 
-import { LoginForm } from '@/components/auth/LoginForm';
+import { RegisterForm } from '@/components/auth/RegisterForm';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-1 text-center">
         <h2 className="text-xl font-semibold text-white">
-          Masuk ke Markas SIGMA
+          Daftar sebagai Agen SIGMA
         </h2>
         <p className="text-sm text-slate-400">
-          Lanjutkan misimu dan kalahkan ERROR-X.
+          Bergabung dengan Satuan Intelijen Generasi Muda Algoritma.
         </p>
       </div>
 
-      <LoginForm />
+      <RegisterForm />
 
       <p className="text-center text-sm text-slate-400">
-        Belum punya akun?{' '}
+        Sudah punya akun?{' '}
         <Link
-          href="/register"
+          href="/login"
           className="font-medium text-sigma-cyan hover:underline"
         >
-          Daftar di sini
+          Masuk di sini
         </Link>
       </p>
     </div>
