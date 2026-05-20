@@ -1,5 +1,6 @@
 'use client';
 
+import { CodeTypingMission } from '@/components/missions/CodeTypingMission';
 import { DragDropMission } from '@/components/missions/DragDropMission';
 import { FillBlankMission } from '@/components/missions/FillBlankMission';
 import { MultipleChoiceMission } from '@/components/missions/MultipleChoiceMission';
@@ -38,6 +39,10 @@ export function MissionChallenge({
     return (
       <MultipleChoiceMission kontenJson={kontenJson} className={className} />
     );
+  }
+
+  if (misiTipe === MisiType.CodeTyping) {
+    return <CodeTypingMission kontenJson={kontenJson} className={className} />;
   }
 
   const instruksi =
