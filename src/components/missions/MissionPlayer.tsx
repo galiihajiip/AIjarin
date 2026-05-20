@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, Bot, Clock, Send, Sparkles } from 'lucide-react';
 
 import { MissionChallenge } from '@/components/missions/MissionChallenge';
+import { StoryCutscene } from '@/components/missions/StoryCutscene';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import type { MissionPlayerData } from '@/lib/missions/fetch-mission-player';
@@ -30,6 +31,7 @@ export function MissionPlayer({
   kontenJson,
   totalSoal,
 }: MissionPlayerProps) {
+  const [cutsceneDone, setCutsceneDone] = useState(false);
   const [currentSoal, setCurrentSoal] = useState(1);
   const [secondsLeft, setSecondsLeft] = useState<number | null>(
     timeLimitSeconds
@@ -37,6 +39,8 @@ export function MissionPlayer({
   const [tutorOpen, setTutorOpen] = useState(false);
 
   useEffect(() => {
+    if (!cutsceneDone) return;
+
     if (timeLimitSeconds == null || timeLimitSeconds <= 0) {
       setSecondsLeft(null);
       return;
@@ -54,7 +58,7 @@ export function MissionPlayer({
     }, 1000);
 
     return () => window.clearInterval(interval);
-  }, [timeLimitSeconds, misiId]);
+  }, [timeLimitSeconds, misiId, cutsceneDone]);
 
   const progressPercent =
     totalSoal > 0 ? Math.round((currentSoal / totalSoal) * 100) : 0;
@@ -69,6 +73,15 @@ export function MissionPlayer({
 
   const timeExpired = secondsLeft === 0;
   const showTimer = timeLimitSeconds != null && timeLimitSeconds > 0;
+
+  if (!cutsceneDone && storyText.trim()) {
+    return (
+      <StoryCutscene
+        text={storyText}
+        onComplete={() => setCutsceneDone(true)}
+      />
+    );
+  }
 
   return (
     <div className="flex min-h-[calc(100dvh-3.5rem)] flex-col">
