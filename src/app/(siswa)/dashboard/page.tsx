@@ -11,6 +11,7 @@ import {
   Zap,
 } from 'lucide-react';
 
+import { AdaptiveRecommendations } from '@/components/dashboard/AdaptiveRecommendations';
 import { createClient } from '@/lib/supabase/server';
 import { MisiStatus, UserRole } from '@/types';
 import { cn } from '@/lib/utils';
@@ -355,6 +356,8 @@ export default async function DashboardPage() {
           </div>
         </div>
       </section>
+
+      <AdaptiveRecommendations siswaId={user.id} />
 
       <section className="rounded-3xl border border-slate-700/70 bg-slate-950/60 p-4 shadow-2xl sm:p-6">
         <div className="mb-5 flex items-center justify-between gap-4">
