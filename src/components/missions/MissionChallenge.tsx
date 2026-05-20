@@ -1,5 +1,6 @@
 'use client';
 
+import { DragDropMission } from '@/components/missions/DragDropMission';
 import type { MissionPlayerData } from '@/lib/missions/fetch-mission-player';
 import { MisiType } from '@/types';
 import { cn } from '@/lib/utils';
@@ -23,6 +24,10 @@ export function MissionChallenge({
   kontenJson,
   className,
 }: MissionChallengeProps) {
+  if (misiTipe === MisiType.DragDrop) {
+    return <DragDropMission kontenJson={kontenJson} className={className} />;
+  }
+
   const instruksi =
     kontenJson &&
     typeof kontenJson === 'object' &&
