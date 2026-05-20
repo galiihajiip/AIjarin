@@ -1,6 +1,7 @@
 'use client';
 
 import { DragDropMission } from '@/components/missions/DragDropMission';
+import { FillBlankMission } from '@/components/missions/FillBlankMission';
 import type { MissionPlayerData } from '@/lib/missions/fetch-mission-player';
 import { MisiType } from '@/types';
 import { cn } from '@/lib/utils';
@@ -26,6 +27,10 @@ export function MissionChallenge({
 }: MissionChallengeProps) {
   if (misiTipe === MisiType.DragDrop) {
     return <DragDropMission kontenJson={kontenJson} className={className} />;
+  }
+
+  if (misiTipe === MisiType.FillBlank) {
+    return <FillBlankMission kontenJson={kontenJson} className={className} />;
   }
 
   const instruksi =
