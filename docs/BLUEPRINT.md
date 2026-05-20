@@ -2,9 +2,19 @@
 
 Versi referensi untuk sesi coding AI. Detail penuh ada di prompt master proyek.
 
+## Lingkungan akses (konteks perangkat & jaringan)
+
+| Konteks | Asumsi |
+|---------|--------|
+| Lab sekolah | PC **low-end** (RAM/CPU terbatas, browser modern) |
+| Pribadi | HP **entry-level hingga mid-range** |
+| Jaringan | Minimal **4G**, sering **5G**, plus **WiFi sekolah** |
+
+Bukan target optimasi ekstrem 2G/3G. UI tetap ringan agar nyaman di lab low-end dan HP menengah (bundle kecil, hindari animasi berat), tanpa mengorbankan pengalaman di jaringan yang memadai.
+
 ## Prinsip wajib
 
-1. UI ringan — cepat di 2G/3G dan perangkat low-spec
+1. UI ringan & responsif — lab komputer low-end, HP entry/mid-range, 4G/5G/WiFi sekolah
 2. Semua teks pengguna dalam **Bahasa Indonesia**, sapaan **kamu**
 3. Nada: empatik, ramah, memotivasi (seperti kakak)
 4. Arsitektur: Vercel + Supabase free tier, biaya &lt; $5/bulan

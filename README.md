@@ -8,7 +8,8 @@ Siswa berperan sebagai **Agen SIGMA** (Satuan Intelijen Generasi Muda Algoritma)
 
 | Aspek | Detail |
 |--------|--------|
-| Audiens | Siswa SMA jalur afirmasi, perangkat & jaringan terbatas (2G/3G) |
+| Audiens | Siswa SMA jalur afirmasi — lab komputer low-end, HP entry/mid-range |
+| Akses | Jaringan minimal **4G** (sering 5G) + **WiFi sekolah**; bukan skenario 2G/3G |
 | Bahasa UI | Bahasa Indonesia, sapaan **kamu**, nada kakak yang mendukung |
 | Narasi | 7 level dari Rekrut SIGMA → Direktur SIGMA |
 | Biaya | Target &lt; $5/bulan (Vercel + Supabase free tier) |
