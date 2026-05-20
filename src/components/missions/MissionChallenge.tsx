@@ -4,6 +4,7 @@ import { CodeTypingMission } from '@/components/missions/CodeTypingMission';
 import { DragDropMission } from '@/components/missions/DragDropMission';
 import { FillBlankMission } from '@/components/missions/FillBlankMission';
 import { MultipleChoiceMission } from '@/components/missions/MultipleChoiceMission';
+import { ProjectMission } from '@/components/missions/ProjectMission';
 import type { MissionPlayerData } from '@/lib/missions/fetch-mission-player';
 import { MisiType } from '@/types';
 import { cn } from '@/lib/utils';
@@ -43,6 +44,10 @@ export function MissionChallenge({
 
   if (misiTipe === MisiType.CodeTyping) {
     return <CodeTypingMission kontenJson={kontenJson} className={className} />;
+  }
+
+  if (misiTipe === MisiType.Project) {
+    return <ProjectMission kontenJson={kontenJson} className={className} />;
   }
 
   const instruksi =
