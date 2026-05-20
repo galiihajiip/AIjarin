@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Bot, Clock, Send, Sparkles } from 'lucide-react';
+import { ArrowLeft, Clock, Send, Sparkles } from 'lucide-react';
 
+import { ChatbotWidget } from '@/components/chatbot/ChatbotWidget';
 import { MissionChallenge } from '@/components/missions/MissionChallenge';
 import { StoryCutscene } from '@/components/missions/StoryCutscene';
 import { Button } from '@/components/ui/button';
@@ -36,7 +37,6 @@ export function MissionPlayer({
   const [secondsLeft, setSecondsLeft] = useState<number | null>(
     timeLimitSeconds
   );
-  const [tutorOpen, setTutorOpen] = useState(false);
 
   useEffect(() => {
     if (!cutsceneDone) return;
@@ -167,17 +167,7 @@ export function MissionPlayer({
           />
         </div>
 
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full border-slate-600 bg-slate-900/60 text-slate-100 hover:bg-slate-800 sm:w-auto"
-            onClick={() => setTutorOpen((open) => !open)}
-            aria-expanded={tutorOpen}
-          >
-            <Bot className="h-4 w-4" aria-hidden />
-            Chatbot Tutor
-          </Button>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
           <Button
             type="button"
             className="w-full bg-sigma-cyan text-sigma-navy hover:bg-sigma-cyan/90 sm:w-auto"
@@ -188,13 +178,13 @@ export function MissionPlayer({
             {currentSoal < totalSoal ? 'Soal Berikutnya' : 'Kirim Jawaban'}
           </Button>
         </div>
-
-        {tutorOpen ? (
-          <p className="mt-3 rounded-lg border border-slate-700 bg-slate-900/80 px-3 py-2 text-xs text-slate-400">
-            Tutor AI akan membantu kamu di sini — fitur ini segera hadir.
-          </p>
-        ) : null}
       </footer>
+
+      <ChatbotWidget
+        misiId={misiId}
+        missionName={misiNama}
+        context={`Level ${levelNomor}: ${levelNama}. Misi: ${misiNama}. Briefing: ${storyText}`}
+      />
     </div>
   );
 }
