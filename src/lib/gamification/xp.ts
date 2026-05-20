@@ -72,3 +72,46 @@ export function calculateLevelFromXP(totalXP: number): number {
 
   return 1;
 }
+
+export type XpProgressInfo = {
+  level: number;
+  currentXp: number;
+  levelFloorXp: number;
+  nextLevelXp: number | null;
+  xpNeededForNextLevel: number;
+  progressPercent: number;
+};
+
+/** XP progress within the current agent level band (for UI bars). */
+export function getXpProgress(totalXP: number): XpProgressInfo {
+  const currentXp = Math.max(0, totalXP);
+  const level = calculateLevelFromXP(currentXp);
+  const maxLevel = XP_LEVEL_THRESHOLDS.length;
+  const levelFloorXp = XP_LEVEL_THRESHOLDS[level - 1] ?? 0;
+  const nextLevelXp = level < maxLevel ? XP_LEVEL_THRESHOLDS[level] : null;
+
+  if (nextLevelXp == null) {
+    return {
+      level,
+      currentXp,
+      levelFloorXp,
+      nextLevelXp: null,
+      xpNeededForNextLevel: 0,
+      progressPercent: 100,
+    };
+  }
+
+  const span = nextLevelXp - levelFloorXp;
+  const xpInBand = currentXp - levelFloorXp;
+  const progressPercent =
+    span > 0 ? Math.min(100, Math.max(0, (xpInBand / span) * 100)) : 0;
+
+  return {
+    level,
+    currentXp,
+    levelFloorXp,
+    nextLevelXp,
+    xpNeededForNextLevel: Math.max(0, nextLevelXp - currentXp),
+    progressPercent,
+  };
+}
