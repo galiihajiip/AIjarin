@@ -1,3 +1,4 @@
+import { getAssessmentType } from '@/lib/missions/assessment-flow';
 import { createClient } from '@/lib/supabase/server';
 import type { JsonValue } from '@/types';
 import { MisiType, UserRole } from '@/types';
@@ -17,6 +18,7 @@ export type MissionPlayerData = {
 
 type MisiRow = {
   id: string;
+  level_id: string;
   nama: string;
   tipe: string;
   xp_reward: number | null;
@@ -103,6 +105,7 @@ export async function fetchMissionForPlayer(
     .select(
       `
       id,
+      level_id,
       nama,
       tipe,
       xp_reward,
@@ -116,6 +119,21 @@ export async function fetchMissionForPlayer(
     .single<MisiRow>();
 
   if (misiError || !misi || !isMisiType(misi.tipe)) {
+    return null;
+  }
+
+  if (getAssessmentType(misi.konten_json)) {
+    return null;
+  }
+
+  const { data: pretestResult } = await supabase
+    .from('pretest_results')
+    .select('id')
+    .eq('siswa_id', user.id)
+    .eq('level_id', misi.level_id)
+    .maybeSingle();
+
+  if (!pretestResult) {
     return null;
   }
 
